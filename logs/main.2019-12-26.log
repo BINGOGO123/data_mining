@@ -16,3 +16,55 @@
 2019-12-26 14:56:13 [INFO] [16] >> 检测Svm模型是否已经训练完成
 2019-12-26 14:56:13 [INFO] [22] >> svm训练模型不存在
 2019-12-26 14:56:13 [DEBUG] [33] >> Svm.train
+2019-12-26 18:29:36 [DEBUG] [10] >> LoadFile.read(./data/train.csv)
+2019-12-26 18:29:47 [DEBUG] [10] >> LoadFile.read(./data/test.csv)
+2019-12-26 18:29:49 [DEBUG] [39] >> scaler
+2019-12-26 18:29:50 [ERROR] [122] >> name 'main' is not defined
+Traceback (most recent call last):
+  File "main.py", line 120, in <module>
+    fun = eval(para + "Classifier")
+  File "<string>", line 1, in <module>
+NameError: name 'main' is not defined
+2019-12-26 18:30:35 [ERROR] [111] >> name 'abcClassifier' is not defined
+Traceback (most recent call last):
+  File "main.py", line 109, in <module>
+    fun = eval(para + "Classifier")
+  File "<string>", line 1, in <module>
+NameError: name 'abcClassifier' is not defined
+2019-12-26 18:31:19 [ERROR] [110] >> abcClassifier 不存在
+Traceback (most recent call last):
+  File "main.py", line 108, in <module>
+    fun = eval(para + "Classifier")
+  File "<string>", line 1, in <module>
+NameError: name 'abcClassifier' is not defined
+2019-12-26 18:31:49 [ERROR] [110] >> 没有 abc 分类器
+Traceback (most recent call last):
+  File "main.py", line 108, in <module>
+    fun = eval(para + "Classifier")
+  File "<string>", line 1, in <module>
+NameError: name 'abcClassifier' is not defined
+2019-12-26 18:31:54 [DEBUG] [10] >> LoadFile.read(./data/train.csv)
+2019-12-26 18:37:54 [DEBUG] [10] >> LoadFile.read(./data/train.csv)
+2019-12-26 18:38:05 [DEBUG] [10] >> LoadFile.read(./data/test.csv)
+2019-12-26 18:38:08 [DEBUG] [40] >> scaler
+2019-12-26 18:38:08 [INFO] [90] >> bayes算法预测开始
+2019-12-26 18:38:08 [DEBUG] [14] >> Bayes.__init__
+2019-12-26 18:38:08 [INFO] [17] >> 检测bayes模型是否已经训练完成
+2019-12-26 18:38:08 [INFO] [23] >> bayes训练模型不存在
+2019-12-26 18:38:08 [DEBUG] [33] >> Bayes.train
+2019-12-26 18:38:09 [INFO] [49] >> bayes模型已经保存至 models/bayes.model 中
+2019-12-26 18:38:09 [DEBUG] [39] >> Bayes.predict
+2019-12-26 18:38:09 [DEBUG] [30] >> LoadFile.write(result/submit_bayes.csv)
+2019-12-26 18:38:10 [INFO] [98] >> bayes算法训练结束，predict结果保存在 result/submit_bayes.csv 中
+2019-12-26 18:39:42 [DEBUG] [10] >> LoadFile.read(./data/train.csv)
+2019-12-26 18:39:53 [DEBUG] [10] >> LoadFile.read(./data/test.csv)
+2019-12-26 18:39:56 [DEBUG] [40] >> scaler
+2019-12-26 18:39:56 [INFO] [103] >> decision_tree算法预测开始
+2019-12-26 18:39:56 [DEBUG] [14] >> DecisionTree.__init__
+2019-12-26 18:39:56 [INFO] [17] >> 检测decision_tree模型是否已经训练完成
+2019-12-26 18:39:56 [INFO] [23] >> decision_tree训练模型不存在
+2019-12-26 18:39:56 [DEBUG] [33] >> DecisionTree.train
+2019-12-26 18:40:09 [INFO] [49] >> decision_tree模型已经保存至 models/decision_tree.model 中
+2019-12-26 18:40:09 [DEBUG] [39] >> DecisionTree.predict
+2019-12-26 18:40:09 [DEBUG] [30] >> LoadFile.write(result/submit_decision_tree.csv)
+2019-12-26 18:40:10 [INFO] [111] >> decision_tree算法训练结束，predict结果保存在 result/submit_decision_tree.csv 中

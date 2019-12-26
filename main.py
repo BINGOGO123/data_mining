@@ -4,17 +4,18 @@
 import sys
 import numpy as np
 import os
+from sklearn.preprocessing import StandardScaler
+import logging
+import datetime
 from module.LoadFile import LoadFile
 from config.config import trainFile
 from config.config import testFile
-from sklearn.preprocessing import StandardScaler
-import logging
 from config.logger import logger
 from module.Bpnn import Bpnn
-import datetime
 from module.Knn import Knn
 from module.Svm import Svm
 from module.DecisionTree import DecisionTree
+from module.Bayes import Bayes
 
 os.chdir(sys.path[0])
 
@@ -85,7 +86,20 @@ def svmClassifier(trainData,trainLabel,testData,testDataSet,load):
     else:
         logger.info("svm算法已经预测过，predict结果保存在 {} 中".format(filename))
 
-def decisionTreeClassifier(trainData,trainLabel,testData,testDataSet,load):
+def bayesClassifier(trainData,trainLabel,testData,testDataSet,load):
+    logger.info("bayes算法预测开始")
+    filename = "result/submit_bayes.csv"
+    bayes = Bayes(True)
+    if not bayes.finished:
+        bayes.train(trainData,trainLabel)
+        bayes.save()
+        testPrediction = bayes.predict(testData)
+        load.write(filename,testDataSet[1],testPrediction)
+        logger.info("bayes算法训练结束，predict结果保存在 {} 中".format(filename))
+    else:
+        logger.info("bayes算法已经预测过，predict结果保存在 {} 中".format(filename))
+
+def decision_treeClassifier(trainData,trainLabel,testData,testDataSet,load):
     logger.info("decision_tree算法预测开始")
     filename = "result/submit_decision_tree.csv"
     decisionTree = DecisionTree(True)
@@ -100,6 +114,16 @@ def decisionTreeClassifier(trainData,trainLabel,testData,testDataSet,load):
 
 if __name__ == "__main__":
     initLogger()
+    if len(sys.argv) > 1:
+        para = sys.argv[1]
+    else:
+        para = "bpnn"
+    try:
+        fun = eval(para + "Classifier")
+    except:
+        logger.exception("没有 {} 分类器".format(para))
+        sys.exit()
+
     # 读取数据
     load = LoadFile()
     trainDataSet = load.read(trainFile)
@@ -111,15 +135,9 @@ if __name__ == "__main__":
     # 神经网络对数据尺度敏感，所以最好在训练前标准化，或者归一化，或者缩放到[-1,1]
     trainData,testData = scaler(trainData,testData)
 
-    # 神经网络训练
-    # size = (50,50)
-    # bpnnClassifier(size,trainData,trainLabel,testData,testDataSet,load)
-
-    # k近邻算法
-    # knnClassifier(trainData,trainLabel,testData,testDataSet,load)
-
-    # 支持向量机算法
-    svmClassifier(trainData,trainLabel,testData,testDataSet,load)
-
-    # 决策树算法
-    # decisionTreeClassifier(trainData,trainLabel,testData,testDataSet,load)
+    # 目前bpnn有点特殊
+    if fun is bpnnClassifier:
+        size = (100,100)
+        fun(size,trainData,trainLabel,testData,testDataSet,load)
+    else:
+        fun(trainData,trainLabel,testData,testDataSet,load)
