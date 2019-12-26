@@ -1,0 +1,18 @@
+2019-12-26 14:16:58 [DEBUG] [10] >> LoadFile.read(./data/train.csv)
+2019-12-26 14:17:09 [DEBUG] [10] >> LoadFile.read(./data/test.csv)
+2019-12-26 14:17:11 [INFO] [54] >> Knn算法预测开始
+2019-12-26 14:17:11 [DEBUG] [15] >> Knn.__init__
+2019-12-26 14:17:11 [INFO] [17] >> 检测knn模型是否已经训练完成
+2019-12-26 14:17:11 [INFO] [23] >> knn训练模型不存在
+2019-12-26 14:17:11 [DEBUG] [33] >> Knn.train
+2019-12-26 14:46:20 [INFO] [50] >> knn模型已经保存至 models/knn.model 中
+2019-12-26 14:46:20 [DEBUG] [39] >> Knn.predict
+2019-12-26 14:47:50 [DEBUG] [30] >> LoadFile.write(result/submit_knn.csv)
+2019-12-26 14:47:50 [INFO] [62] >> knn算法训练结束，predict结果保存在 result/submit_knn.csv 中
+2019-12-26 14:55:58 [DEBUG] [10] >> LoadFile.read(./data/train.csv)
+2019-12-26 14:56:10 [DEBUG] [10] >> LoadFile.read(./data/test.csv)
+2019-12-26 14:56:13 [INFO] [69] >> svm算法预测开始
+2019-12-26 14:56:13 [DEBUG] [14] >> Svm.__init__
+2019-12-26 14:56:13 [INFO] [16] >> 检测Svm模型是否已经训练完成
+2019-12-26 14:56:13 [INFO] [22] >> svm训练模型不存在
+2019-12-26 14:56:13 [DEBUG] [33] >> Svm.train
