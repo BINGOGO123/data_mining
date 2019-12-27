@@ -50,10 +50,15 @@ DataMining
 1. 训练与预测
 
    ```powershell
+   python main.py
+   ```
+   > 进行遗传特征选择算法，通过决策树进行评分，其中最后的submit文件保存为`result/final.csv`
+
+   ```powershell
    python main.py bpnn/knn/bayes/decision_tree/svm
    ```
 
-   > 参数5选一，默认`bpnn`
+   > 参数5选一，直接通过以上五种算法进行训练测试，submit文件保存在`result`目录下
 
 2. 评估
 

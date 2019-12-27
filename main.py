@@ -16,6 +16,8 @@ from module.Knn import Knn
 from module.Svm import Svm
 from module.DecisionTree import DecisionTree
 from module.Bayes import Bayes
+from module.score import score
+from module.Ga import Ga
 
 os.chdir(sys.path[0])
 
@@ -112,12 +114,34 @@ def decision_treeClassifier(trainData,trainLabel,testData,testDataSet,load):
     else:
         logger.info("decision_tree算法已经预测过，predict结果保存在 {} 中".format(filename))
 
+def gaClassifier(trainData,trainLabel,testData,testLabel,testDataSet,load):
+    def treeScore(array):
+        decisionTree = DecisionTree()
+        temTrainData = trainData[:,array]
+        temTestData = testData[:,array]
+        decisionTree.train(temTrainData,trainLabel)
+        temTestPrediction = decisionTree.predict(temTestData)
+        return score(testLabel,temTestPrediction)
+
+    logger.info("遗传算法特征选择开始，得分算法：决策树")
+    ga = Ga(50,trainData.shape[1],treeScore,0.5)
+    bestLife,best = ga.start()
+
+    filename = "result/final.csv"
+    trainData = trainData[:,bestLife]
+    testData = testData[:,bestLife]
+    decisionTree = DecisionTree()
+    decisionTree.train(trainData,trainLabel)
+    testPrediction = decisionTree.predict(testData)
+    load.write(filename,testDataSet[1],testPrediction)
+    logger.info("遗传算法得到的最优特征：{}，最高得分：{}，submit文件保存为：{}".format(bestLife,best,filename))
+
 if __name__ == "__main__":
     initLogger()
     if len(sys.argv) > 1:
         para = sys.argv[1]
     else:
-        para = "bpnn"
+        para = "ga"
     try:
         fun = eval(para + "Classifier")
     except:
@@ -139,5 +163,7 @@ if __name__ == "__main__":
     if fun is bpnnClassifier:
         size = (100,100)
         fun(size,trainData,trainLabel,testData,testDataSet,load)
+    if fun is gaClassifier:
+        fun(trainData,trainLabel,testData,testLabel,testDataSet,load)
     else:
         fun(trainData,trainLabel,testData,testDataSet,load)
